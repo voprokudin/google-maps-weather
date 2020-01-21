@@ -13,10 +13,10 @@ import javax.inject.Inject;
 public class VPWeatherViewModel extends ViewModel {
 
     @Inject
-    public VPWeatherViewModel() {}
+    VPWeatherViewModel() {}
 
     @Inject
-    public VPGetWeatherByGeographicCoordinatesUseCase getWeatherByGeographicCoordinatesUseCase;
+    VPGetWeatherByGeographicCoordinatesUseCase getWeatherByGeographicCoordinatesUseCase;
 
     private final MutableLiveData<VPWeatherInfoModel> mutableLiveData = new MutableLiveData<>();
 

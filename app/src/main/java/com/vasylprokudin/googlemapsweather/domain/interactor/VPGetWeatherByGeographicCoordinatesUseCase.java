@@ -13,10 +13,10 @@ import static com.vasylprokudin.googlemapsweather.C.Keys.WEATHER_KEY;
 public class VPGetWeatherByGeographicCoordinatesUseCase extends VPSingleUseCase<VPWeatherInfoModel, List<Double>> {
 
     @Inject
-    public VPGetWeatherByGeographicCoordinatesUseCase() {}
+    VPGetWeatherByGeographicCoordinatesUseCase() {}
 
     @Inject
-    public VPWeatherService weatherService;
+    VPWeatherService weatherService;
 
     @NotNull
     @Override
@@ -30,16 +30,5 @@ public class VPGetWeatherByGeographicCoordinatesUseCase extends VPSingleUseCase<
 
     private Single<VPWeatherInfoModel> weatherByGeolocation(List<Double> coordinates) {
         return weatherService.getWeatherByGeolocation(coordinates.get(0), coordinates.get(1), WEATHER_KEY);
-
-        /** Here I should get iconCode field from API and then using
-         *
-         * map().flatMapIterable() operators iterate each iconCode field in Array and make
-         *
-         * separate network call for each retrieved iconCode using flatMap() operator
-         *
-         * and update icon field of VPWeatherDetail model. Then I will be have all data and
-         *
-         * will be able populate recycle view with all data retrieved from 2 different APIs.
-         **/
     }
 }

@@ -6,7 +6,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-
 import butterknife.ButterKnife;
 import dagger.android.support.DaggerFragment;
 
@@ -29,9 +28,7 @@ public abstract class VPFragment extends DaggerFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(getGetLayoutResId(), container, false);
-//        ButterKnife.bind(this, view);
-        return view;
+        return inflater.inflate(getGetLayoutResId(), container, false);
     }
 
     public void showProgressBar() {

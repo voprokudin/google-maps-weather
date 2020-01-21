@@ -14,6 +14,7 @@ import com.vasylprokudin.googlemapsweather.data.model.VPWeatherDayDetail;
 import com.vasylprokudin.googlemapsweather.data.model.VPWeatherInfoModel;
 import com.vasylprokudin.googlemapsweather.util.VPDateFormatter;
 import com.vasylprokudin.googlemapsweather.util.VPTemperatureConverter;
+import com.vasylprokudin.googlemapsweather.util.VPWeatherIconProvider;
 import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -27,6 +28,8 @@ public class VPWeatherAdapter extends RecyclerView.Adapter<VPWeatherAdapter.VPWe
 
     private VPTemperatureConverter temperatureConverter;
 
+    private VPWeatherIconProvider weatherIconProvider;
+
     private VPDateFormatter dateFormatter;
 
     private Context context;
@@ -35,11 +38,13 @@ public class VPWeatherAdapter extends RecyclerView.Adapter<VPWeatherAdapter.VPWe
             VPWeatherInfoModel weatherInfoModel,
             VPTemperatureConverter temperatureConverter,
             VPDateFormatter dateFormatter,
+            VPWeatherIconProvider weatherIconProvider,
             Context context
     ) {
         this.weatherInfoModel = weatherInfoModel;
         this.temperatureConverter = temperatureConverter;
         this.dateFormatter = dateFormatter;
+        this.weatherIconProvider = weatherIconProvider;
         this.context = context;
 
         list = weatherInfoModel.getList();
@@ -86,26 +91,23 @@ public class VPWeatherAdapter extends RecyclerView.Adapter<VPWeatherAdapter.VPWe
         }
 
         void bind(int position) {
-            double tempInKelvin = weatherInfoModel.getList().get(position).getMain().getTemp();
+            VPWeatherDayDetail listItem = weatherInfoModel.getList().get(position);
+            String iconCode = listItem.getWeather().get(0).getIcon();
+            double tempInKelvin = listItem.getMain().getTemp();
+            long longDate = listItem.getDt();
             int tempInCelsius = temperatureConverter.convertKelvinToCelsius(tempInKelvin);
-            long longDate = weatherInfoModel.getList().get(position).getDt();
 
             city.setText(weatherInfoModel.getCity().getName());
             description.setText(weatherInfoModel.getList().get(position).getWeather().get(0).getMain());
             date.setText(String.valueOf(dateFormatter.getConvertedDate(longDate)));
             temperature.setText(String.format("%s %s", String.valueOf(tempInCelsius), C.Strings.CELSIUS));
-
-            Glide.with(context).load("http://openweathermap.org/img/wn/01d@2x.png").into(icon);
+            Glide.with(context).load(weatherIconProvider.provideCurrentIcon(iconCode)).into(icon);
         }
     }
 
     private int provideItemCount() {
         if (weatherInfoModel.getList() != null) {
-            if (list.size() >= C.Integer.FORECAST_DAYS) {
-                return C.Integer.FORECAST_DAYS;
-            } else {
-                return C.Integer.ZERO;
-            }
+            return list.size();
         } else {
             return C.Integer.ZERO;
         }

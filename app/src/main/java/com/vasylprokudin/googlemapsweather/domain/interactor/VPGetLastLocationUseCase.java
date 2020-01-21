@@ -6,15 +6,13 @@ import com.google.android.gms.tasks.Task;
 import com.vasylprokudin.googlemapsweather.domain.interactor.base.VPSingleUseCase;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-
 import javax.inject.Inject;
-
 import io.reactivex.Single;
 
 public class VPGetLastLocationUseCase extends VPSingleUseCase<Task<Location>, FusedLocationProviderClient> {
 
     @Inject
-    public VPGetLastLocationUseCase() {}
+    VPGetLastLocationUseCase() {}
 
     @NotNull
     @Override

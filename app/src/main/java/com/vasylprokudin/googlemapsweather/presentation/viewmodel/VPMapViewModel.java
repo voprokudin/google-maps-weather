@@ -24,13 +24,13 @@ public class VPMapViewModel extends ViewModel {
     private static final int REQUEST_CODE = 101;
 
     @Inject
-    public VPMapViewModel() {}
+    VPMapViewModel() {}
 
     @Inject
-    public VPWeatherNavigator navigator;
+    VPWeatherNavigator navigator;
 
     @Inject
-    public VPGetLastLocationUseCase getLastLocationUseCase;
+    VPGetLastLocationUseCase getLastLocationUseCase;
 
     private final MutableLiveData<Location> mutableLiveData = new MutableLiveData<>();
 

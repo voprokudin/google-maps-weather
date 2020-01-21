@@ -17,6 +17,8 @@ import com.vasylprokudin.googlemapsweather.presentation.view.list.adapter.VPWeat
 import com.vasylprokudin.googlemapsweather.presentation.viewmodel.VPWeatherViewModel;
 import com.vasylprokudin.googlemapsweather.util.VPDateFormatter;
 import com.vasylprokudin.googlemapsweather.util.VPTemperatureConverter;
+import com.vasylprokudin.googlemapsweather.util.VPWeatherIconProvider;
+
 import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,13 +31,16 @@ import static com.vasylprokudin.googlemapsweather.C.BundleArgs.USER_LONGITUDE;
 public class VPWeatherFragment extends VPFragment {
 
     @Inject
-    public ViewModelProvider.Factory viewModelFactory;
+    ViewModelProvider.Factory viewModelFactory;
 
     @Inject
-    public VPTemperatureConverter temperatureConverter;
+    VPTemperatureConverter temperatureConverter;
 
     @Inject
-    public VPDateFormatter dateFormatter;
+    VPWeatherIconProvider weatherIconProvider;
+
+    @Inject
+    VPDateFormatter dateFormatter;
 
     @Inject
     Context context;
@@ -102,6 +107,7 @@ public class VPWeatherFragment extends VPFragment {
                 weatherInfoModel,
                 temperatureConverter,
                 dateFormatter,
+                weatherIconProvider,
                 context
         );
         recyclerView.setHasFixedSize(true);
@@ -110,7 +116,7 @@ public class VPWeatherFragment extends VPFragment {
     }
 
     @NotNull
-    public final VPWeatherViewModel provideViewModel() {
+    private VPWeatherViewModel provideViewModel() {
         VPWeatherViewModel viewModel = ViewModelProviders.of(this, viewModelFactory).get(VPWeatherViewModel.class);
         Intrinsics.checkExpressionValueIsNotNull(viewModel, "ViewModelProviders.of(th…ctory).get(T::class.java)");
         return viewModel;

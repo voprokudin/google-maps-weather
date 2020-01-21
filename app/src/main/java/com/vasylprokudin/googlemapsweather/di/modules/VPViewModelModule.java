@@ -12,7 +12,7 @@ import dagger.Module;
 import dagger.multibindings.IntoMap;
 
 @Module
-public abstract class VPViewModelModule {
+abstract class VPViewModelModule {
 
     @Binds
     @IntoMap

@@ -13,6 +13,8 @@ public class C {
 
     public interface Strings {
         String CELSIUS = "°C";
+        String BASE_WEATHER_ICON_BODY_ADDRESS = "http://openweathermap.org/img/wn/";
+        String BASE_WEATHER_ICON_FORMAT_ADDRESS = "@2x.png";
     }
 
     public interface Keys {

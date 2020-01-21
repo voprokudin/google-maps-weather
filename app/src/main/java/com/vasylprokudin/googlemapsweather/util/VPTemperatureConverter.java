@@ -6,8 +6,7 @@ import javax.inject.Inject;
 public class VPTemperatureConverter {
 
     @Inject
-    public VPTemperatureConverter() {
-    }
+    public VPTemperatureConverter() {}
 
     public int convertKelvinToCelsius(double kelvinTemp) {
         double celsiusTemp = kelvinTemp - C.Double.KELVIN_TEMPERATURE;
